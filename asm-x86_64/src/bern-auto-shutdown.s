@@ -18,7 +18,7 @@ SHUTDOWN_ARGS:
 	.quad 0
 
 timespec:
-	.quad 5
+	.quad 60
 	.quad 0
 
 buf:

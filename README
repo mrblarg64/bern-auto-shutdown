@@ -1,3 +1,3 @@
-A simple auto shutdown that turns your computer off when the battery is less than or equal to 15%.
+A simple auto shutdown that turns your computer off when there is no wall power and the battery is less than or equal to 15%.
 
 Be sure to modify the constants that tell it where to get the battery data from, they are at the top of the source files for all supported architectures (x86_64 and C).
