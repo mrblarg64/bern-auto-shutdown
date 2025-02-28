@@ -1,0 +1,8 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+
+asm-x86_64/bern-auto-shutdown
+c/bern-auto-shutdown

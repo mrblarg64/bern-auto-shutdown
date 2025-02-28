@@ -1,8 +1,10 @@
-		.data
+	#Copyright 2022-2025 Brian William Denton
+	#Available under the GNU GPL v3 License
+	.data
 AC_STATUS_FILE:
-	.string "/sys/class/power_supply/ACAD/online"
+	.string "/sys/class/power_supply/AC/online"
 BATTERY_STATUS_FILE:
-	.string "/sys/class/power_supply/BAT1/capacity"
+	.string "/sys/class/power_supply/BAT0/capacity"
 SHUTDOWN_CMD:
 	.string "/sbin/shutdown"
 arg0:
@@ -28,6 +30,11 @@ buf:
 	.globl _start
 	.text
 _start:
+	mov $157, %rax #prctl
+	mov $29, %rdi
+	mov $61000000000, %rsi
+	syscall
+loopagain:
 	mov $2, %rax #open
 	mov $AC_STATUS_FILE, %rdi
 	mov $0, %rsi
@@ -55,7 +62,7 @@ sleeploop:
 	mov $timespec, %rdi
 	mov $0, %rsi
 	syscall
-	jmp _start
+	jmp loopagain
 	
 checkbattery:
 	mov $2, %rax #open

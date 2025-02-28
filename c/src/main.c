@@ -1,9 +1,13 @@
+//Copyright 2022-2025 Brian William Denton
+//Licensed under the GNU GPL version 3 License
+
 //#define _XOPEN_SOURCE 500
 //#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/prctl.h>
 
 #define AC_STATUS_FILE "/sys/class/power_supply/ACAD/online"
 #define BATTERY_STATUS_FILE "/sys/class/power_supply/BAT1/capacity"
@@ -38,6 +42,13 @@ int main(int argc, char *argv[])
 	/* { */
 		
 	/* } */
+
+	if (prctl(PR_SET_TIMERSLACK, 61000000000))
+	{
+		perror("prctl");
+		return 1;
+	}
+
 	while (1)
 	{
 		fd = open(AC_STATUS_FILE, O_RDONLY);
